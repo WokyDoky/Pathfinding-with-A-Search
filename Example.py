@@ -1,6 +1,8 @@
 from warnings import warn
 import heapq
 
+import Utilities
+
 
 class Node:
     """
@@ -38,15 +40,14 @@ def return_path(current_node):
         current = current.parent
     return path[::-1]  # Return reversed path
 
-
-def astar(maze, start, end, allow_diagonal_movement=False):
-    """
+"""
     Returns a list of tuples as a path from the given start to the given end in the given maze
     :param maze:
     :param start:
     :param end:
     :return:
     """
+def astar(maze, start, end, allow_diagonal_movement=False):
 
     # Create start and end node
     start_node = Node(None, start)
@@ -103,7 +104,9 @@ def astar(maze, start, end, allow_diagonal_movement=False):
                 continue
 
             # Make sure walkable terrain
-            if maze[node_position[0]][node_position[1]] != 0:
+            terrain_cost = maze[node_position[0]][node_position[1]]
+
+            if terrain_cost == 0:
                 continue
 
             # Create new node
@@ -119,9 +122,11 @@ def astar(maze, start, end, allow_diagonal_movement=False):
                 continue
 
             # Create the f, g, and h values
-            child.g = current_node.g + 1
-            child.h = ((child.position[0] - end_node.position[0]) ** 2) + (
-                        (child.position[1] - end_node.position[1]) ** 2)
+            child.g = current_node.g + terrain_cost
+            ## Manhattan distance
+            #  Note: It does work but it is worse than using the Euclidean distance.
+            #   Quite a lot worse.
+            child.h = abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])
             child.f = child.g + child.h
 
             # Child is already in the open list
@@ -135,55 +140,18 @@ def astar(maze, start, end, allow_diagonal_movement=False):
     warn("Couldn't get a path to destination")
     return None
 
-def path_printer(maze, path):
-    print(" ", end=" ")
-    for row in range(len(maze)): print(row, end = " ")
-    print("")
-    for i in range(len(maze)):  # Iterate over rows
-        print(i, end = " ")
-        for j in range(len(maze[i])):  # Iterate over columns
-            if (i, j) in path:
-                print("X", end=" ")
-            else:
-                print("O", end=" ")
-        print()  # Print a newline after each row
 
-def maze_chooser (i):
-    if i == 1:
-        maze = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-        return maze
-    elif i == 2:
-        maze = [[1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]]
-        return maze
 
 def main():
 
-    maze = maze_chooser(1)
+    maze = Utilities.maze_chooser(3)
 
     start = (0, 0)
     end = (1, 6)
     print("Starting point: ", start, " End point: ", end)
     path = astar(maze, start, end)
     print(path)
-    path_printer(maze, path)
+    Utilities.path_printer(maze, path)
 
 
 if __name__ == '__main__':
