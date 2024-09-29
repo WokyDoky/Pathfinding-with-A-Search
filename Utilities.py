@@ -19,20 +19,20 @@ def path_printer(maze, path, start, end):
 
 def start_aligner (i):
     if i == 1:
-        return (1,2)
+        return 1,2
     elif i == 2:
-        return (3,6)
+        return 3,6
     elif i == 3:
-        return (1,2)
-    else: return (2,4)
+        return 1,2
+    else: return 2,4
 def end_aligner (i):
     if i == 1:
-        return (4,3)
+        return 4,3
     elif i == 2:
-        return (5,1)
+        return 5,1
     elif i == 3:
-        return (8,8)
-    else: return (7,6)
+        return 8,8
+    else: return 7,6
 def maze_chooser (i):
     if i == 1:
         maze = [[2,4,2,1,4,5,2],
@@ -61,6 +61,7 @@ def maze_chooser (i):
                 [2,0,5,1,5,2,1,2,4,1],
                 [1,2,2,2,0,2,0,1,1,0],
                 [5,1,2,1,1,1,2,0,1,2]]
+        return maze
     else:
         maze = [[1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
                 [1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
