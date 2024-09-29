@@ -1,6 +1,6 @@
 from warnings import warn
 import heapq
-
+import numpy as np
 import Utilities
 
 
@@ -126,7 +126,9 @@ def astar(maze, start, end, allow_diagonal_movement=False):
             ## Manhattan distance
             #  Note: It does work but it is worse than using the Euclidean distance.
             #   Quite a lot worse.
-            child.h = abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])
+            # abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])
+            child.h = np.sqrt((child.position[0] - end_node.position[0]) ** 2 + (child.position[1] - end_node.position[1]) ** 2)
+
             child.f = child.g + child.h
 
             # Child is already in the open list
@@ -144,14 +146,17 @@ def astar(maze, start, end, allow_diagonal_movement=False):
 
 def main():
 
-    maze = Utilities.maze_chooser(3)
+    mazeOption = 1
+    maze = Utilities.maze_chooser(mazeOption)
 
-    start = (0, 0)
-    end = (1, 6)
-    print("Starting point: ", start, " End point: ", end)
+    start = Utilities.start_aligner(mazeOption)
+    end = Utilities.end_aligner(mazeOption)
     path = astar(maze, start, end)
+    print(np.matrix(maze))
+    print("Path cost: ", Utilities.calculate_path_cost(maze, path))
+    print("Manhattan distance: ", Utilities.calculate_manhattan_distance(start, end))
     print(path)
-    Utilities.path_printer(maze, path)
+    Utilities.path_printer(maze, path, start, end)
 
 
 if __name__ == '__main__':
