@@ -47,64 +47,57 @@ def return_path(current_node):
     :param end:
     :return:
     """
-def astar(maze, start, end, allow_diagonal_movement=False):
+
+
+def astar(maze, start, end):
     start_node = Node(None, start)
-    start_node.g = start_node.h = start_node.f = 0
     end_node = Node(None, end)
-    end_node.g = end_node.h = end_node.f = 0
 
     open_list = []
-    closed_list = set()
-    open_dict = {start_node.position: start_node}
-
+    closed_list = []
     heapq.heapify(open_list)
     heapq.heappush(open_list, start_node)
 
-    adjacent_squares = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-    if allow_diagonal_movement:
-        adjacent_squares += [(-1, -1), (-1, 1), (1, -1), (1, 1)]
+    movement_directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # Up, Down, Left, Right
 
-    while open_list:
+    while len(open_list) > 0:
         current_node = heapq.heappop(open_list)
-        closed_list.add(current_node.position)
+        closed_list.append(current_node)
 
         if current_node == end_node:
             return return_path(current_node)
 
         children = []
 
-        for new_position in adjacent_squares:
-            node_position = (current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
+        for move in movement_directions:
+            node_position = (current_node.position[0] + move[0], current_node.position[1] + move[1])
 
-            if (node_position[0] < 0 or node_position[0] >= len(maze) or
-                node_position[1] < 0 or node_position[1] >= len(maze[0])):
+            if node_position[0] > (len(maze) - 1) or node_position[0] < 0 or node_position[1] > (len(maze[0]) - 1) or \
+                    node_position[1] < 0:
                 continue
 
             terrain_cost = maze[node_position[0]][node_position[1]]
+
             if terrain_cost == 0:
                 continue
 
             new_node = Node(current_node, node_position)
-            children.append(new_node)
+            new_node.g = current_node.g + terrain_cost
+            new_node.h = abs(new_node.position[0] - end_node.position[0]) + abs(
+                new_node.position[1] - end_node.position[1])  # Manhattan distance
+            new_node.f = new_node.g + new_node.h
 
-        for child in children:
-            if child.position in closed_list:
+            if len([closed_child for closed_child in closed_list if closed_child == new_node]) > 0:
                 continue
 
-            child.g = current_node.g + maze[child.position[0]][child.position[1]]
-            child.h = np.sqrt((child.position[0] - end_node.position[0]) ** 2 +
-                              (child.position[1] - end_node.position[1]) ** 2)
-            child.f = child.g + child.h
-
-            if child.position in open_dict and child.g >= open_dict[child.position].g:
+            if len([open_node for open_node in open_list if
+                    new_node.position == open_node.position and new_node.g > open_node.g]) > 0:
                 continue
 
-            heapq.heappush(open_list, child)
-            open_dict[child.position] = child
+            heapq.heappush(open_list, new_node)
 
-    warn("Couldn't get a path to destination")
+    warn("Couldn't find a path to the destination")
     return None
-
 
 
 def main():
