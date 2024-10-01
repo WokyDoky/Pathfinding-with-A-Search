@@ -1,6 +1,8 @@
 from warnings import warn
 import heapq
 import numpy as np
+import timeit
+
 import Utilities
 
 
@@ -103,17 +105,32 @@ def astar(maze, start, end, allow_diagonal_movement = False, heursitic_euclidean
     warn("Couldn't find a path to the destination")
     return None
 
+def helper_method (maze, start, end, diagonal, heuristic):
+    start_time = timeit.default_timer()
+    astar(maze, start, end, diagonal, heuristic)
+    elapsed = timeit.default_timer() - start_time
+    print(f"Execution time for astar({diagonal}, {heuristic}): {elapsed:.10f} seconds")
+
 def timeing_different_heuristic_formulas():
     mazeOption = 3
     maze = Utilities.maze_chooser(mazeOption)
 
     start = Utilities.start_aligner(mazeOption)
     end = Utilities.end_aligner(mazeOption)
-    path = astar(maze, start, end, True, True)
-    #Fix this please. >///<
+    combinations = [(False, False), (False, True), (True, False), (True, True)]
+
+    for comb in combinations:
+        start_time = timeit.default_timer()
+        astar(maze, start, end, comb[0], comb[1])
+        elapsed = timeit.default_timer() - start_time
+        print(f"Execution time for helper_method({mazeOption}, {start}, {end}, {comb[0]}, {comb[1]}): {elapsed:.10f} seconds")
 
 def main():
-
+    timeing_different_heuristic_formulas()
+    print("==================================================")
+    ''' 
+    This will have to be deleted 
+    '''
     mazeOption = 1
     maze = Utilities.maze_chooser(mazeOption)
 
