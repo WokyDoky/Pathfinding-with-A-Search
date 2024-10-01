@@ -49,7 +49,7 @@ def return_path(current_node):
     """
 
 
-def astar(maze, start, end):
+def astar(maze, start, end, allow_diagonal_movement = False, heursitic_euclidean = False):
     start_node = Node(None, start)
     end_node = Node(None, end)
 
@@ -59,6 +59,8 @@ def astar(maze, start, end):
     heapq.heappush(open_list, start_node)
 
     movement_directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]  # Up, Down, Left, Right
+    if allow_diagonal_movement:
+        movement_directions += [(-1, -1), (-1, 1), (1, -1), (1, 1)]
 
     while len(open_list) > 0:
         current_node = heapq.heappop(open_list)
@@ -83,8 +85,10 @@ def astar(maze, start, end):
 
             new_node = Node(current_node, node_position)
             new_node.g = current_node.g + terrain_cost
-            new_node.h = abs(new_node.position[0] - end_node.position[0]) + abs(
-                new_node.position[1] - end_node.position[1])  # Manhattan distance
+            if heursitic_euclidean:
+                new_node.h = abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])  # Manhattan distance.
+            else:
+                np.sqrt((new_node.position[0] - end_node.position[0]) ** 2 +(new_node.position[1] - end_node.position[1]) ** 2) # Euclidean distance.
             new_node.f = new_node.g + new_node.h
 
             if len([closed_child for closed_child in closed_list if closed_child == new_node]) > 0:
@@ -99,15 +103,23 @@ def astar(maze, start, end):
     warn("Couldn't find a path to the destination")
     return None
 
-
-def main():
-
+def timeing_different_heuristic_formulas():
     mazeOption = 3
     maze = Utilities.maze_chooser(mazeOption)
 
     start = Utilities.start_aligner(mazeOption)
     end = Utilities.end_aligner(mazeOption)
-    path = astar(maze, start, end)
+    path = astar(maze, start, end, True, True)
+    #Fix this please. >///<
+
+def main():
+
+    mazeOption = 1
+    maze = Utilities.maze_chooser(mazeOption)
+
+    start = Utilities.start_aligner(mazeOption)
+    end = Utilities.end_aligner(mazeOption)
+    path = astar(maze, start, end, True, True)
     print(np.matrix(maze))
     print("Path cost: ", Utilities.calculate_path_cost(maze, path))
     print("Manhattan distance: ", Utilities.calculate_manhattan_distance(start, end))
