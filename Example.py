@@ -19,6 +19,7 @@ choose diagonal.
 
 
 from warnings import warn
+import random
 import heapq
 import numpy as np
 import timeit
@@ -62,16 +63,24 @@ def return_path(current_node):
         current = current.parent
     return path[::-1]  # Return reversed path
 
+def heuristic_function(i, new_node, end_node):
+    if i == 0: return 0;
+    #Manhattan Distance
+    if i == 1: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])  # Manhattan distance.
+    #Euclidean Distance
+    if i == 2: return np.sqrt((new_node.position[0] - end_node.position[0]) ** 2 + (new_node.position[1] - end_node.position[1]) ** 2) # Euclidean distance.
+    #Manhattan Distance with added errors.
+    if i == 3: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1]) + random.randint(-3, 3)  # Manhattan distance + Random number.
+
 """
     Returns a list of tuples as a path from the given start to the given end in the given maze
     :param maze:
     :param start:
     :param end:
-    :return:
+    :return path: 
     """
 
-
-def astar(maze, start, end, allow_diagonal_movement = False, heursitic_euclidean = False):
+def astar(maze, start, end, heuristic, allow_diagonal_movement = False):
     start_node = Node(None, start)
     end_node = Node(None, end)
 
@@ -107,10 +116,7 @@ def astar(maze, start, end, allow_diagonal_movement = False, heursitic_euclidean
 
             new_node = Node(current_node, node_position)
             new_node.g = current_node.g + terrain_cost
-            if heursitic_euclidean:
-                new_node.h = abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])  # Manhattan distance.
-            else:
-                np.sqrt((new_node.position[0] - end_node.position[0]) ** 2 +(new_node.position[1] - end_node.position[1]) ** 2) # Euclidean distance.
+            new_node.h = heuristic_function(heuristic, new_node, end_node)
             new_node.f = new_node.g + new_node.h
 
             if len([closed_child for closed_child in closed_list if closed_child == new_node]) > 0:
@@ -125,38 +131,35 @@ def astar(maze, start, end, allow_diagonal_movement = False, heursitic_euclidean
     warn("Couldn't find a path to the destination")
     return None
 
-def helper_method (maze, start, end, diagonal, heuristic):
-    start_time = timeit.default_timer()
-    astar(maze, start, end, diagonal, heuristic)
-    elapsed = timeit.default_timer() - start_time
-    print(f"Execution time for astar({diagonal}, {heuristic}): {elapsed:.10f} seconds")
 
 def timeing_different_heuristic_formulas():
-    mazeOption = 3
+    mazeOption = 1
     maze = Utilities.maze_chooser(mazeOption)
 
     start = Utilities.start_aligner(mazeOption)
     end = Utilities.end_aligner(mazeOption)
     combinations = [(False, False), (False, True), (True, False), (True, True)]
 
-    for comb in combinations:
-        start_time = timeit.default_timer()
-        astar(maze, start, end, comb[0], comb[1])
-        elapsed = timeit.default_timer() - start_time
-        print(f"Execution time for helper_method({mazeOption}, {start}, {end}, {comb[0]}, {comb[1]}): {elapsed:.10f} seconds")
+    for integer_value in range(4):  # 0 to 3
+        for boolean_value in [False, True]:
+            start_time = timeit.default_timer()
+            astar(maze, start, end, integer_value, boolean_value)  # Call your function here
+            elapsed = timeit.default_timer() - start_time
+            print(
+                f"Execution time for helper_method( {start}, {end}, {integer_value}, {boolean_value}): {elapsed:.10f} seconds")
 
 def main():
     timeing_different_heuristic_formulas()
-    print("==================================================")
-    ''' 
-    This will have to be deleted 
-    '''
+    """
+    This will have to be deleted
+    Needs to prompt the user what map they want and what heuristic.
+    """
     mazeOption = 1
     maze = Utilities.maze_chooser(mazeOption)
 
     start = Utilities.start_aligner(mazeOption)
     end = Utilities.end_aligner(mazeOption)
-    path = astar(maze, start, end, True, True)
+    path = astar(maze, start, end, 1)
     print(np.matrix(maze))
     print("Path cost: ", Utilities.calculate_path_cost(maze, path))
     print("Manhattan distance: ", Utilities.calculate_manhattan_distance(start, end))
