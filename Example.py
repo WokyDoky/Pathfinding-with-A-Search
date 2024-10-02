@@ -128,12 +128,12 @@ def astar(maze, start, end, heuristic, allow_diagonal_movement = False):
 
             heapq.heappush(open_list, new_node)
 
-    warn("Couldn't find a path to the destination")
+    #warn("Couldn't find a path to the destination")
     return None
 
 
-def timeing_different_heuristic_formulas():
-    mazeOption = 1
+def timeing_different_heuristic_formulas(mazeOption):
+    print(f"Maze: {mazeOption}")
     maze = Utilities.maze_chooser(mazeOption)
 
     start = Utilities.start_aligner(mazeOption)
@@ -141,30 +141,43 @@ def timeing_different_heuristic_formulas():
     combinations = [(False, False), (False, True), (True, False), (True, True)]
 
     for integer_value in range(4):  # 0 to 3
-        for boolean_value in [False, True]:
-            start_time = timeit.default_timer()
-            astar(maze, start, end, integer_value, boolean_value)  # Call your function here
-            elapsed = timeit.default_timer() - start_time
-            print(
-                f"Execution time for helper_method( {start}, {end}, {integer_value}, {boolean_value}): {elapsed:.10f} seconds")
+        start_time = timeit.default_timer()
+        astar(maze, start, end, integer_value)  # Call your function here
+        elapsed = timeit.default_timer() - start_time
+        print(
+            f"Execution time for h({integer_value}) (Start: {start}, End: {end}): {elapsed:.10f} seconds")
+
+def print_info(start, end, maze, path, print_extra = False):
+
+    print("Path cost: ", Utilities.calculate_path_cost(maze, path))
+    print("Manhattan distance: ", Utilities.calculate_manhattan_distance(start, end))
+    print(path)
+    if print_extra:
+        print(np.matrix(maze))
+        Utilities.path_printer(maze, path, start, end)
 
 def main():
-    timeing_different_heuristic_formulas()
+    #Do not use unless you want to generate graph
+    #   Utilities.make_graph()
     """
     This will have to be deleted
     Needs to prompt the user what map they want and what heuristic.
     """
-    mazeOption = 1
-    maze = Utilities.maze_chooser(mazeOption)
+    print("Enter 2 values, first value will choose a map, second value will choose a heuristic.")
+    print("Values for the map range from 1 - 5 and for the heuristic value from 1 - 4.")
 
-    start = Utilities.start_aligner(mazeOption)
-    end = Utilities.end_aligner(mazeOption)
-    path = astar(maze, start, end, 1)
-    print(np.matrix(maze))
-    print("Path cost: ", Utilities.calculate_path_cost(maze, path))
-    print("Manhattan distance: ", Utilities.calculate_manhattan_distance(start, end))
-    print(path)
-    Utilities.path_printer(maze, path, start, end)
+    # Read input and split, then cast to integers
+    value1, value2 = map(int, input("Separate values by a space > ").split())
+
+    maze_option = value1
+    maze = Utilities.maze_chooser(maze_option)
+
+    start = Utilities.start_aligner(maze_option)
+    end = Utilities.end_aligner(maze_option)
+
+    path = astar(maze, start, end, value2)
+
+    print_info(start, end, maze, path)
 
 
 if __name__ == '__main__':
