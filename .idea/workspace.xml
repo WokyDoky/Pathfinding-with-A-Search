@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1d9b7a9-4817-478d-86a5-2776ccb44185" name="Changes" comment="Working.">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2024_8_35_AM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2024_8_35_AM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e1d9b7a9-4817-478d-86a5-2776ccb44185" name="Changes" comment="Working. Added timer and number of nodes.">
       <change beforePath="$PROJECT_DIR$/Example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Example.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,6 +26,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -166,7 +164,7 @@
       <workItem from="1727805896642" duration="5397000" />
       <workItem from="1727841012334" duration="2939000" />
       <workItem from="1727879592778" duration="323000" />
-      <workItem from="1727879925634" duration="298000" />
+      <workItem from="1727879925634" duration="415000" />
     </task>
     <task id="LOCAL-00001" summary="Original Example code contained a bug. Fix.">
       <option name="closed" value="true" />
@@ -280,7 +278,23 @@
       <option name="project" value="LOCAL" />
       <updated>1727843829256</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Working. Added timer and number of nodes.">
+      <option name="closed" value="true" />
+      <created>1727880287410</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1727880287410</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Working. Added timer and number of nodes.">
+      <option name="closed" value="true" />
+      <created>1727880316389</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1727880316389</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,10 +346,11 @@
     <MESSAGE value="We are missing the ability to choose maps and starting points." />
     <MESSAGE value="Perfectly works" />
     <MESSAGE value="Working." />
-    <option name="LAST_COMMIT_MESSAGE" value="Working." />
+    <MESSAGE value="Working. Added timer and number of nodes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working. Added timer and number of nodes." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Example.coverage" NAME="Example Coverage Results" MODIFIED="1727880208111" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Example.coverage" NAME="Example Coverage Results" MODIFIED="1727880253378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$astar.coverage" NAME="astar Coverage Results" MODIFIED="1727806682325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Downloads" />
     <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Utilities.coverage" NAME="Utilities Coverage Results" MODIFIED="1727821449236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

@@ -338,6 +338,7 @@ def main():
     print_info(start, end, maze, path)
     print(f"Execution time for h({h_value}) (Start: {start}, End: {end}): {elapsed:.10f} milliseconds")
 
+#Change
 if __name__ == '__main__':
     main()
 
