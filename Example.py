@@ -8,10 +8,12 @@ The maze contains numbers that indicate the cost of traveling into
 a particular space.
 A number 0 indicates that it is not possible to enter that space.
 
-As of right now, user can choose between two options, either
-manhattan distance or Euclidean distance. User can also choose
-between allowing diagonal or not. For this assignment, it will not
-choose diagonal.
+User can choose between 4 distinct heuristic functions. User can also choose
+between allowing diagonal movement or not. For this assignment, it will not
+choose diagonal as default.
+
+Assumptions:
+    The code will not loop to chose other maps.
 
 """
 
