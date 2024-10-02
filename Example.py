@@ -131,7 +131,7 @@ def astar(maze, start, end, heuristic, allow_diagonal_movement = False):
 
 
 def print_info(start, end, maze, path, print_extra = False):
-
+    if path is None: return "No info to Print"
     print("Path cost: ", calculate_path_cost(maze, path))
     print("Manhattan distance: ", calculate_manhattan_distance(start, end))
     print(path)
