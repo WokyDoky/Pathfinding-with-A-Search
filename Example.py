@@ -60,13 +60,15 @@ def return_path(current_node):
     return path[::-1]  # Return reversed path
 
 def heuristic_function(i, new_node, end_node):
-    if i == 0: return 0;
+    if i == 1: return 0
     #Manhattan Distance
-    if i == 1: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])  # Manhattan distance.
+    if i == 2: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1])  # Manhattan distance.
     #Euclidean Distance
-    if i == 2: return np.sqrt((new_node.position[0] - end_node.position[0]) ** 2 + (new_node.position[1] - end_node.position[1]) ** 2) # Euclidean distance.
+    if i == 3: return np.sqrt((new_node.position[0] - end_node.position[0]) ** 2 + (new_node.position[1] - end_node.position[1]) ** 2) # Euclidean distance.
     #Manhattan Distance with added errors.
-    if i == 3: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1]) + random.randint(-3, 3)  # Manhattan distance + Random number.
+    if i == 4: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1]) + random.randint(-3, 3)  # Manhattan distance + Random number.
+
+    else: return abs(new_node.position[0] - end_node.position[0]) + abs(new_node.position[1] - end_node.position[1]) / 2
 
 """
     Returns a list of tuples as a path from the given start to the given end in the given maze
