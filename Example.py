@@ -302,12 +302,7 @@ def make_graph():
     plt.xticks(range(4), [f'h({i})' for i in range(4)])
     plt.show()
 
-"""
-    Code might look weird since it was originally two files with a utility class.
-    Had to merge them for this assignment.
-    If the original code wants to be seen follow this link:
-    https://github.com/WokyDoky/Pathfinding-with-A-Search/blob/addingMoreHeuristicValues/Utilities.py
-"""
+
 
 """
 =====================================================================================
