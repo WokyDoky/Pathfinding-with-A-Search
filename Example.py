@@ -19,6 +19,8 @@ Assumptions:
 
 import random
 import heapq
+import sys
+
 import numpy as np
 import timeit
 import matplotlib.pyplot as plt
@@ -285,6 +287,7 @@ def timeing_different_heuristic_formulas(mazeOption):
     return times
 
 def make_graph():
+    temp_var = 5
     heuristic_times = {i: [] for i in range(4)}  # Store times for each heuristic
 
     # Run the function for all maps
@@ -301,7 +304,7 @@ def make_graph():
     plt.xlabel('Heuristic Function')
     plt.ylabel('Average Execution Time (seconds)')
     plt.title('Average Execution Time for Heuristic Functions Across All Maps')
-    plt.xticks(range(4), [f'h({i})' for i in range(4)])
+    plt.xticks(range(4), [f'h({i + 1})' for i in range(4)])
     plt.show()
 
 
@@ -312,14 +315,11 @@ def make_graph():
 =====================================================================================
 """
 
-def main():
+def main(map_number, heuristic):
     #Do not use unless you want to generate graph
-    #   Utilities.make_graph()
-    print("Enter 2 values, first value will choose a map, second value will choose a heuristic.")
-    print("Values for the map range from 1 - 5 and for the heuristic value from 1 - 4.")
+    #make_graph()
 
-    # Read input and split, then cast to integers
-    map_num, h_value = map(int, input("Separate values by a space > ").split())
+    map_num, h_value = map_number, heuristic
 
     maze_option = map_num
     maze = maze_chooser(maze_option)
@@ -337,6 +337,10 @@ def main():
 
 #Change
 if __name__ == '__main__':
-    main()
+
+    map_number = sys.argv[1]
+    heuristic = sys.argv[2]
+
+    main(map_number, heuristic)
 
 #Code by Nicholas Swift, modified by Jesus Daniel Benavente.

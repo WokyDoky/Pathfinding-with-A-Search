@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e1d9b7a9-4817-478d-86a5-2776ccb44185" name="Changes" comment="Working and corrected indices.">
+    <list default="true" id="e1d9b7a9-4817-478d-86a5-2776ccb44185" name="Changes" comment="Works">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2024_8_35_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2024_8_35_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Example.py" beforeDir="false" afterPath="$PROJECT_DIR$/Example.py" afterDir="false" />
     </list>
@@ -23,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="willMergeToMain" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +71,7 @@
   }
 }</component>
   <component name="QodanaCloudProjectLink">
-    <option name="lastReportId" value="ydolJ" />
+    <option name="lastReportId" value="LVDPe" />
     <option name="linkedProjectId" value="p4aKd" />
     <option name="linkedProjectName" value="My first project" />
     <option name="organizationId" value="Al2rO" />
@@ -166,7 +168,11 @@
       <workItem from="1727879592778" duration="323000" />
       <workItem from="1727879925634" duration="1429000" />
       <workItem from="1727890894306" duration="374000" />
-      <workItem from="1727891507649" duration="128000" />
+      <workItem from="1727891507649" duration="943000" />
+      <workItem from="1727927262349" duration="1549000" />
+      <workItem from="1727928833168" duration="234000" />
+      <workItem from="1728176484352" duration="124000" />
+      <workItem from="1729617904193" duration="556000" />
     </task>
     <task id="LOCAL-00001" summary="Original Example code contained a bug. Fix.">
       <option name="closed" value="true" />
@@ -312,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1727891154943</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Works">
+      <option name="closed" value="true" />
+      <created>1727891660170</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1727891660170</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,10 +380,11 @@
     <MESSAGE value="Working." />
     <MESSAGE value="Working. Added timer and number of nodes." />
     <MESSAGE value="Working and corrected indices." />
-    <option name="LAST_COMMIT_MESSAGE" value="Working and corrected indices." />
+    <MESSAGE value="Works" />
+    <option name="LAST_COMMIT_MESSAGE" value="Works" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Example.coverage" NAME="Example Coverage Results" MODIFIED="1727891569163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Example.coverage" NAME="Example Coverage Results" MODIFIED="1727927647392" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$astar.coverage" NAME="astar Coverage Results" MODIFIED="1727806682325" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Downloads" />
     <SUITE FILE_PATH="coverage/Pathfinding_with_A_Search$Utilities.coverage" NAME="Utilities Coverage Results" MODIFIED="1727821449236" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
